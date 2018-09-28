@@ -7,6 +7,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('org.flywaydb:flyway-gradle-plugin:5.1.4')
     }
 }
 
@@ -14,6 +15,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.flywaydb.flyway'
 
 group = 'com.example.mall'
 version = '0.0.1-SNAPSHOT'
@@ -22,7 +24,6 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
 }
-
 
 ext {
     springCloudVersion = 'Finchley.SR1'
@@ -44,4 +45,11 @@ dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
+}
+
+
+flyway {
+    url = 'jdbc:mysql://localhost:3306/micro-product?useUnicode=true&characterEncoding=UTF-8'
+    user = 'root'
+    password = 'abc123'
 }
